@@ -41,5 +41,15 @@ next.infected<-latest$infected + new.infected - new.recovereds
 data.frame(susceptibles=next.susceptible, infecteds=next.infected)
 }
 
+#'##### Does the function work without any external (global) information?
+
+if (length(findGlobals(step_deterministic_SIS,
+                       merge = FALSE)$variables) != 0) {
+  stop(
+    "Function step_deterministic_SIS() may not use global variable(s): ",
+    findGlobals(step_deterministic_SIS, merge = FALSE)$variables
+  )
+}
+
 
   
