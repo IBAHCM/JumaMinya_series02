@@ -23,26 +23,25 @@ library(codetools)
 #'
 #' Returns:
 #' - the next count for updated population count
-
+#'
 #'##The function
 step_deterministic_SIS <- function(latest, transmission.rate, recovery.rate)   
 {
-
+#'
 # Calculate the population size   
 pop.size<-latest$susceptible + latest$infected
-
+#'
 #calculate changes to the population
 new.recovereds<-recovery.rate*latest$infected
 new.infected<-transmission.rate*latest$susceptible*(latest$infected/pop.size)
 next.susceptible<-latest$susceptible + new.recovereds-new.infected
 next.infected<-latest$infected + new.infected - new.recovereds
-
+#'
 # create a data frame with updated population and return    
 data.frame(susceptibles=next.susceptible, infecteds=next.infected)
 }
-
 #'##### Does the function work without any external (global) information?
-
+#'
 if (length(findGlobals(step_deterministic_SIS,
                        merge = FALSE)$variables) != 0) {
   stop(
@@ -50,6 +49,7 @@ if (length(findGlobals(step_deterministic_SIS,
     findGlobals(step_deterministic_SIS, merge = FALSE)$variables
   )
 }
-
+#'
+#'
 
   
