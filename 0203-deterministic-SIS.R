@@ -34,29 +34,25 @@ timestep_deterministic_SIS <- function(latest,transmission.rate,
 #'
 # Calculate the population size   
 pop.size<-latest$susceptible + latest$infected
-# Calculate changes to the population
+#'
 # Calculate the effective transmission rate
 effective.transmission.rate<-transmission.rate*timestep
 #'
 # Calculate the effective recovery rate
 effective.recovery.rate<-recovery.rate*timestep
 #'
-# other parameters
-new.susceptible<-effective.recovery.rate * latest$infected 
-new.infected<-effective.transmission.rate * latest$susceptible *
+# other population parameters changes
+new.recovered <- recovery.rate * latest$infected 
+new.infected <- effective.transmission.rate * latest$susceptible *
   (latest$infected/pop.size)
 next.susceptible<-latest$susceptible + new.susceptible-new.infected
-next.infected<-latest$infected + new.infected - new.susceptible
+next.infected<-latest$infected + new.infected - new.recovered
 #'
 # create a data frame with updated population and return    
 #'
-return(data.frame(time=latest$time + timestep,
+return(data.frame(time = latest$time + timestep,
                   susceptibles = next.susceptible,
                   infecteds = next.infected))
-#'
-return(data.frame(susceptibles = next.susceptible,
-                  infecteds = next.infected,
-                  time = time))
 }
 #'
 # Does the function work without any external (global) information?
