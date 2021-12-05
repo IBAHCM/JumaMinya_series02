@@ -1,5 +1,5 @@
 #'
-#' title: "Run step_deterministic_SIS function"
+#' title: "Run timestep_deterministic_SIS function"
 #' author: "Juma Minya"
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
 #' output: html_document
@@ -20,11 +20,7 @@ library(RPiR)
 #' 
 # Read the function
 source("0203-deterministic-SIS.R")
-<<<<<<< HEAD
-=======
 source("0201-step-SIS.R")
-
->>>>>>> 03bb629bcda9400569fa27c9d63fa350f78f3be8
 #'
 #' First we set up the simulation parameters for every experiment.
 #Set the simulation parameters
@@ -39,17 +35,10 @@ end.time<-100
 this.timestep<-1
 #'
 # Set up the population starting size data frame
-<<<<<<< HEAD
 population.df<-data.frame(time = start.time,
                            susceptibles = initial.susceptibles,
                            infecteds = initial.infecteds)
-#
 #'
-=======
-population.df<-data.frame(time=start.time,
-                           susceptibles=initial.susceptibles,
-                           infecteds=initial.infecteds)
-
 # The time steps that the simulation will run through
 timesteps <- seq(from = start.time+1, to = end.time)
 
@@ -70,8 +59,8 @@ latest.population<-timestep_deterministic_SIS(latest = latest.population,
 # Set up the population starting size (at the first time step)
 population1.df<-data.frame(time=start.time, susceptibles=initial.susceptibles,
                            infecteds=initial.infecteds)
-
->>>>>>> 03bb629bcda9400569fa27c9d63fa350f78f3be8
+#'
+#'
 ##specify the sequence of time steps, in this case we will use "while" function
 # and timestep will be updated with the data frame rather than making an 
 # independent vector for timestep
@@ -86,14 +75,9 @@ next.population<-timestep_deterministic_SIS(latest = tail(population.df,1),
                                             transmission.rate = ecoli.transmission,
                                              recovery.rate = ecoli.recovery,
                                                 timestep = this.timestep)
-<<<<<<< HEAD
+#'
 #'
 population.df<-rbind(population.df, next.population)
-=======
-
-
-population1.df<-rbind(population1.df, next.population1)
->>>>>>> 03bb629bcda9400569fa27c9d63fa350f78f3be8
 }
 #'
 #' Plot the results
@@ -133,26 +117,22 @@ plot_populations(population1.df, col=c("green", "red"))
 plot_populations(population.df, col=c("green", "red"))
 plot_populations(population1.df, new.graph = FALSE, col=c("green", "red"))
 #'
-<<<<<<< HEAD
+#'
 # This shows that the graphs are similar in appearance with just an extension
 # (from time = 1.0) as there is no changes for the time below 1
-=======
+#'
 # This shows that the graphs are similar in appearance.
->>>>>>> 03bb629bcda9400569fa27c9d63fa350f78f3be8
+#'
 #'
 #Setting a new timestep of 5
 this.timestep.4<-5
 #'
 # Set up the population starting size data frame
-<<<<<<< HEAD
+#'
 population.df<-data.frame(time = start.time,
                            susceptibles = initial.susceptibles,
                            infecteds = initial.infecteds)
-=======
-population.df<-data.frame(time=start.time,
-                           susceptibles=initial.susceptibles,
-                           infecteds=initial.infecteds)
->>>>>>> 03bb629bcda9400569fa27c9d63fa350f78f3be8
+#'
 #'
 # The time steps that the simulation will run through
 timesteps <- seq(from = start.time+1, to = end.time)
@@ -174,19 +154,12 @@ population.df <- rbind(population.df, latest.population)
 #Using the step_deterministic function
 #'
 #' # Set up the population starting size data frame
-<<<<<<< HEAD
+#'
 population1.df<-data.frame(susceptibles = initial.susceptibles, 
                            infecteds = initial.infecteds)
 #'
 # The time steps that the simulation will run through
 timesteps<-seq(from = start.time + 1, to = end.time, by = this.timestep.4)
-=======
-population1.df<-data.frame(susceptibles=initial.susceptibles, 
-                           infecteds=initial.infecteds)
-#'
-# The time steps that the simulation will run through
-timesteps<-seq(from=start.time+1, to=end.time, by=this.timestep.4)
->>>>>>> 03bb629bcda9400569fa27c9d63fa350f78f3be8
 #'
 #Run the simulation
 for(new.time in timesteps)
