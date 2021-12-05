@@ -1,4 +1,4 @@
-#' title: "Practical 2-3: Library containing a step_deterministic_SIS function"
+#' title: "Practical 2-3: Library containing a timestep_deterministic_SIS function"
 #' author: "Juma Minya"
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
 #' output: html_document
@@ -36,16 +36,17 @@ timestep_deterministic_SIS <- function(latest,transmission.rate,
 pop.size<-latest$susceptible + latest$infected
 #'
 # Calculate the effective transmission rate
-effective.transmission.rate<-transmission.rate*timestep
+effective.transmission.rate <- transmission.rate*timestep
 #'
 # Calculate the effective recovery rate
-effective.recovery.rate<-recovery.rate*timestep
+effective.recovery.rate <- recovery.rate*timestep
 #'
 # other population parameters changes
-new.recovered <- recovery.rate * latest$infected 
+new.susceptible<-effective.transmission.rate*latest$infected
+new.recovered <- effective.recovery.rate * latest$infected 
 new.infected <- effective.transmission.rate * latest$susceptible *
   (latest$infected/pop.size)
-next.susceptible<-latest$susceptible + new.susceptible-new.infected
+next.susceptible<-latest$susceptible + new.recovered - new.infected
 next.infected<-latest$infected + new.infected - new.recovered
 #'
 # create a data frame with updated population and return    
@@ -56,7 +57,7 @@ return(data.frame(time = latest$time + timestep,
 }
 #'
 # Does the function work without any external (global) information?
-if (length(findGlobals(step_deterministic_SIS,
+if (length(findGlobals(timestep_deterministic_SIS,
                        merge = FALSE)$variables) != 0) {
   stop(
     "Function timestep_deterministic_SIS() may not use global variable(s): ",
