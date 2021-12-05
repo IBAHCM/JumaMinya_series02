@@ -25,7 +25,7 @@ library(codetools)
 #'  - **timestep** -- series of a time frame
 #'
 #' Returns:
-#' - the next count for updated population count of infected and susceptibles
+#' - the next count for updated population of infected and susceptibles
 #'
 #'##The function
 timestep_deterministic_SIS <- function(latest,transmission.rate,
@@ -35,14 +35,13 @@ timestep_deterministic_SIS <- function(latest,transmission.rate,
 # Calculate the population size   
 pop.size<-latest$susceptible + latest$infected
 #'
-# Calculate the effective transmission rate
+# Calculate the effective transmission rate for timesteps
 effective.transmission.rate <- transmission.rate*timestep
 #'
-# Calculate the effective recovery rate
+# Calculate the effective recovery rate for timesteps
 effective.recovery.rate <- recovery.rate*timestep
 #'
 # other population parameters changes
-new.susceptible<-effective.transmission.rate*latest$infected
 new.recovered <- effective.recovery.rate * latest$infected 
 new.infected <- effective.transmission.rate * latest$susceptible *
   (latest$infected/pop.size)

@@ -20,7 +20,6 @@ library(RPiR)
 #' 
 # Read the function
 source("0203-deterministic-SIS.R")
-source("0201-step-SIS.R")
 #'
 #' First we set up the simulation parameters for every experiment.
 #Set the simulation parameters
@@ -114,6 +113,7 @@ population1.df$time<-c(start.time,timesteps)
 plot_populations(population1.df, col=c("green", "red"))
 #'
 #comparing the two graphs
+par(mfrow = c(1,2)) #plotting the graphs side by side
 plot_populations(population.df, col=c("green", "red"))
 plot_populations(population1.df, new.graph = FALSE, col=c("green", "red"))
 #'
@@ -178,6 +178,7 @@ population1.df$time<-c(start.time,timesteps)
 plot_populations(population1.df, col=c("green", "red"))
 #'
 #' comparing the two graphs
+par(mfrow = c(1,2)) #plotting the graphs side by side
 plot_populations(population.df, col=c("green", "red"))
 plot_populations(population1.df, new.graph = FALSE, col=c("green", "red"))
 #'
