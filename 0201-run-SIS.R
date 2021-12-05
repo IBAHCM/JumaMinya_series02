@@ -49,17 +49,7 @@ population1.df <- rbind(population1.df, next.population1)
 }
 #'Add time to updated data frame so as to see how the population changes with time.
 population1.df$time<-c(start.time,timesteps)
-
-#'##### Does the function work without any external (global) information?
-
-if (length(findGlobals(step_deterministic_SIS,
-                       merge = FALSE)$variables) != 0) {
-  stop(
-    "Function step_deterministic_SIS() may not use global variable(s): ",
-    findGlobals(step_deterministic_SIS, merge = FALSE)$variables
-  )
-}
-
+#'
 #' Plot the results
 #' ----------------
 #' And finally we output the results.
