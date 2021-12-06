@@ -90,6 +90,8 @@ population.SIS.df<-rbind(population.SIS.df, latest.population.SIS)
 #' ----------------
 #' And finally we output the results of the timesteps against population vector.
 plot_populations(population.SIS.df, col=c("green","red"))
+#'
+#'
 #
 # The difference between the two models is that in SIR models,the population 
 # balances with recovereds and susceptibles at equilibrium state, while in SIS model,
@@ -128,10 +130,10 @@ while (latest.population1.SIR$time < end.time)
 #'
 #'# Plot the results
 plot_populations(population1.SIR.df, col=c("green","red", "black"))
-
+#'
 #' 
-#' #'Setted parameters for comparison for larger R0
-
+#'Setted parameters for comparison for larger R0
+#'
 farm.transmission2 <- 0.02
 farm.recovery2 <- 0.1
 #'
