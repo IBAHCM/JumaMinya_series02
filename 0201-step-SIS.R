@@ -28,18 +28,18 @@ library(codetools)
 #'##The function
 step_deterministic_SIS <- function(latest, transmission.rate, recovery.rate)   
 {
-
-# Calculate the population size   
-pop.size<-latest$susceptibles + latest$infecteds
-
-#calculate changes to the population
-new.recovereds <- recovery.rate * latest$infecteds
-new.infecteds <- transmission.rate * latest$susceptibles*(latest$infecteds/pop.size)
-next.susceptibles <- latest$susceptibles + new.recovereds-new.infecteds
-next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
-
-# create a data frame with updated population and return    
-data.frame(susceptibles=next.susceptibles, infecteds=next.infecteds)
+  
+  # Calculate the population size   
+  pop.size<-latest$susceptibles + latest$infecteds
+  
+  #calculate changes to the population
+  new.recovereds <- recovery.rate * latest$infecteds
+  new.infecteds <- transmission.rate * latest$susceptibles*(latest$infecteds/pop.size)
+  next.susceptibles <- latest$susceptibles + new.recovereds-new.infecteds
+  next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
+  
+  # create a data frame with updated population and return    
+  data.frame(susceptibles=next.susceptibles, infecteds=next.infecteds)
 }
 #'##### Does the function work without any external (global) information?
 
@@ -53,4 +53,4 @@ if (length(findGlobals(step_deterministic_SIS,
 #'
 #'
 
-  
+
