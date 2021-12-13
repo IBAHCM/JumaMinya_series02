@@ -17,6 +17,7 @@
 #' 
 #Loading Packages
 library(RPiR)
+library(knitr)
 #' 
 # Read the function
 source("0203-deterministic-SIS.R")
