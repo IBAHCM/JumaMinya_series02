@@ -26,36 +26,34 @@ library(codetools)
 #'  - **timestep** -- series of a time frame
 #'
 #' Returns:
-#' - the next count for updated population of infected and susceptibles
+#' - the next count for updated population of infecteds and susceptibles
 #'
 #'##The function
 timestep_deterministic_SIS <- function(latest,transmission.rate,
                                          recovery.rate,timestep)
 {
-#'
 # Calculate the population size   
-pop.size<-latest$susceptible + latest$infected
-#'
+pop.size<-latest$susceptibles + latest$infecteds
+
 # Calculate the effective transmission rate for timesteps
 effective.transmission.rate <- transmission.rate*timestep
-#'
+
 # Calculate the effective recovery rate for timesteps
 effective.recovery.rate <- recovery.rate*timestep
-#'
+
 # other population parameters changes
-new.recovered <- effective.recovery.rate * latest$infected 
-new.infected <- effective.transmission.rate * latest$susceptible *
-  (latest$infected/pop.size)
-next.susceptible<-latest$susceptible + new.recovered - new.infected
-next.infected<-latest$infected + new.infected - new.recovered
-#'
+new.recovereds <- effective.recovery.rate * latest$infecteds 
+new.infecteds <- effective.transmission.rate * latest$susceptibles *
+  (latest$infecteds/pop.size)
+next.susceptibles <- latest$susceptibles + new.recovereds - new.infecteds
+next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
+
 # create a data frame with updated population and return    
-#'
 return(data.frame(time = latest$time + timestep,
-                  susceptibles = next.susceptible,
-                  infecteds = next.infected))
+                  susceptibles = next.susceptibles,
+                  infecteds = next.infecteds))
 }
-#'
+
 # Does the function work without any external (global) information?
 if (length(findGlobals(timestep_deterministic_SIS,
                        merge = FALSE)$variables) != 0) {
