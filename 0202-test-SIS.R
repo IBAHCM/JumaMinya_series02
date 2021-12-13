@@ -14,6 +14,7 @@
 #' 
 #Loading Packages
 library(RPiR)
+library(knitr)
 #' 
 # Read the function
 source("0201-step-SIS.R")
