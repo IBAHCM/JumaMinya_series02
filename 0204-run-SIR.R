@@ -38,21 +38,21 @@ this.timestep <- 0.75
 #'
 # Set up the population starting size data frame
 population.SIR.df<-data.frame(time = start.time,
-                           susceptibles = initial.susceptibles,
-                           infecteds = initial.infecteds,
-                           recovereds = initial.recovereds)
+                              susceptibles = initial.susceptibles,
+                              infecteds = initial.infecteds,
+                              recovereds = initial.recovereds)
 #'
 #Run the simulation
 latest.population.SIR <- population.SIR.df
 
 while (latest.population.SIR$time < end.time) 
 {
-# calling the new timestep function with the population at the next time step:
-latest.population.SIR<-timestep_deterministic_SIR(latest = latest.population.SIR, 
-                                           transmission.rate = farm.transmission,
-                                           recovery.rate = farm.recovery,
-                                           timestep = this.timestep)
-# Add new element onto end of population vector
+  # calling the new timestep function with the population at the next time step:
+  latest.population.SIR<-timestep_deterministic_SIR(latest = latest.population.SIR, 
+                                                    transmission.rate = farm.transmission,
+                                                    recovery.rate = farm.recovery,
+                                                    timestep = this.timestep)
+  # Add new element onto end of population vector
   population.SIR.df <- rbind(population.SIR.df, latest.population.SIR)
 }
 #'
@@ -69,22 +69,22 @@ source("0203-deterministic-SIS.R")
 #'
 # Set up the population starting size (at the first time step)
 population.SIS.df <- data.frame(time = start.time, 
-                              susceptibles = initial.susceptibles,
-                              infecteds = initial.infecteds)
+                                susceptibles = initial.susceptibles,
+                                infecteds = initial.infecteds)
 #
 #'
 latest.population.SIS <- population.SIS.df
 #'
 while(latest.population.SIS$time < end.time)
 {
-#Run the simulation
-latest.population.SIS <- timestep_deterministic_SIS(latest = latest.population.SIS,
-                                            transmission.rate = farm.transmission,
-                                             recovery.rate = farm.recovery,
-                                                timestep = this.timestep)
-#'
-#'
-population.SIS.df<-rbind(population.SIS.df, latest.population.SIS)
+  #Run the simulation
+  latest.population.SIS <- timestep_deterministic_SIS(latest = latest.population.SIS,
+                                                      transmission.rate = farm.transmission,
+                                                      recovery.rate = farm.recovery,
+                                                      timestep = this.timestep)
+  #'
+  #'
+  population.SIS.df<-rbind(population.SIS.df, latest.population.SIS)
 }
 #'
 #' Plot the results
@@ -111,21 +111,21 @@ farm.recovery1 <- 1/2
 #'
 # Set up the population starting size data frame
 population1.SIR.df<-data.frame(time = start.time,
-                              susceptibles = initial.susceptibles,
-                              infecteds = initial.infecteds,
-                              recovereds = initial.recovereds)
+                               susceptibles = initial.susceptibles,
+                               infecteds = initial.infecteds,
+                               recovereds = initial.recovereds)
 #'
 #Run the simulation
 latest.population1.SIR <- population1.SIR.df
 
 while (latest.population1.SIR$time < end.time) 
 {
-# calling the new timestep function with the population at the next time step:
+  # calling the new timestep function with the population at the next time step:
   latest.population1.SIR<-timestep_deterministic_SIR(latest = latest.population1.SIR, 
-                                                    transmission.rate = farm.transmission1,
-                                                    recovery.rate = farm.recovery1,
-                                                    timestep = this.timestep)
-# Add new element onto end of population vector
+                                                     transmission.rate = farm.transmission1,
+                                                     recovery.rate = farm.recovery1,
+                                                     timestep = this.timestep)
+  # Add new element onto end of population vector
   population1.SIR.df <- rbind(population1.SIR.df, latest.population1.SIR)
 }
 #'
@@ -149,12 +149,12 @@ latest.population2.SIR <- population2.SIR.df
 
 while (latest.population2.SIR$time < end.time) 
 {
-# calling the new timestep function with the population at the next time step:
+  # calling the new timestep function with the population at the next time step:
   latest.population2.SIR<-timestep_deterministic_SIR(latest = latest.population2.SIR, 
                                                      transmission.rate = farm.transmission2,
                                                      recovery.rate = farm.recovery2,
                                                      timestep = this.timestep)
-# Add new element onto end of population vector
+  # Add new element onto end of population vector
   population2.SIR.df <- rbind(population2.SIR.df, latest.population2.SIR)
 }
 # Plot the results
