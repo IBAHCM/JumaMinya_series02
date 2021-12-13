@@ -30,28 +30,28 @@ library(codetools)
 #'
 #'##The function
 timestep_deterministic_SIS <- function(latest,transmission.rate,
-                                         recovery.rate,timestep)
+                                       recovery.rate,timestep)
 {
-# Calculate the population size   
-pop.size<-latest$susceptibles + latest$infecteds
-
-# Calculate the effective transmission rate for timesteps
-effective.transmission.rate <- transmission.rate*timestep
-
-# Calculate the effective recovery rate for timesteps
-effective.recovery.rate <- recovery.rate*timestep
-
-# other population parameters changes
-new.recovereds <- effective.recovery.rate * latest$infecteds 
-new.infecteds <- effective.transmission.rate * latest$susceptibles *
-  (latest$infecteds/pop.size)
-next.susceptibles <- latest$susceptibles + new.recovereds - new.infecteds
-next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
-
-# create a data frame with updated population and return    
-return(data.frame(time = latest$time + timestep,
-                  susceptibles = next.susceptibles,
-                  infecteds = next.infecteds))
+  # Calculate the population size   
+  pop.size<-latest$susceptibles + latest$infecteds
+  
+  # Calculate the effective transmission rate for timesteps
+  effective.transmission.rate <- transmission.rate*timestep
+  
+  # Calculate the effective recovery rate for timesteps
+  effective.recovery.rate <- recovery.rate*timestep
+  
+  # other population parameters changes
+  new.recovereds <- effective.recovery.rate * latest$infecteds 
+  new.infecteds <- effective.transmission.rate * latest$susceptibles *
+    (latest$infecteds/pop.size)
+  next.susceptibles <- latest$susceptibles + new.recovereds - new.infecteds
+  next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
+  
+  # create a data frame with updated population and return    
+  return(data.frame(time = latest$time + timestep,
+                    susceptibles = next.susceptibles,
+                    infecteds = next.infecteds))
 }
 
 # Does the function work without any external (global) information?
@@ -64,4 +64,4 @@ if (length(findGlobals(timestep_deterministic_SIS,
 }
 
 
-  
+
