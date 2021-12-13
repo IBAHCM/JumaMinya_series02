@@ -1,4 +1,4 @@
-#'
+#' ---
 #' title: "Run timestep_deterministic_SIS function"
 #' author: "Juma Minya"
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
@@ -36,19 +36,19 @@ this.timestep <- 1 #time in weeks
 #population = herd
 # Set up the population starting size data frame
 population.df<-data.frame(time = start.time,
-                           susceptibles = initial.susceptibles,
-                           infecteds = initial.infecteds)
+                          susceptibles = initial.susceptibles,
+                          infecteds = initial.infecteds)
 
 #Run the simulation
 latest.population <- population.df
 while (latest.population$time < end.time) 
 {
-# calling the new timestep function with the population at the next time step:
-latest.population <- timestep_deterministic_SIS(latest = latest.population, 
-                                           transmission.rate = ecoli.transmission,
-                                           recovery.rate = ecoli.recovery,
-                                           timestep = this.timestep)
-# Add new element onto end of population vector
+  # calling the new timestep function with the population at the next time step:
+  latest.population <- timestep_deterministic_SIS(latest = latest.population, 
+                                                  transmission.rate = ecoli.transmission,
+                                                  recovery.rate = ecoli.recovery,
+                                                  timestep = this.timestep)
+  # Add new element onto end of population vector
   population.df <- rbind(population.df, latest.population)
 }
 #'
@@ -70,7 +70,7 @@ ecoli.recovery <- 1/3
 timesteps <- 1 #time in weeks
 # Set up the population starting size data frame
 population1.df <- data.frame(susceptibles = initial.susceptibles, 
-                           infecteds = initial.infecteds)
+                             infecteds = initial.infecteds)
 
 # The timesteps that the simulation will run through
 timesteps <- seq(from = start.time + 1, to = end.time, by = this.timestep)
@@ -78,11 +78,11 @@ timesteps <- seq(from = start.time + 1, to = end.time, by = this.timestep)
 #Run the simulation
 for(new.time in timesteps)
 {
-next.population1 <- step_deterministic_SIS(latest = tail(population1.df,1), 
-                                           transmission.rate = ecoli.transmission*this.timestep,
-                                           recovery.rate = ecoli.recovery*this.timestep)
+  next.population1 <- step_deterministic_SIS(latest = tail(population1.df,1), 
+                                             transmission.rate = ecoli.transmission*this.timestep,
+                                             recovery.rate = ecoli.recovery*this.timestep)
   
-population1.df <- rbind(population1.df, next.population1)
+  population1.df <- rbind(population1.df, next.population1)
 }
 #Adding the time vector into the population
 population1.df$time <- c(start.time,timesteps)
@@ -111,8 +111,8 @@ this.timestep.2 <- 5
 #'
 # Set up the population starting size data frame
 population2.df<-data.frame(time = start.time,
-                          susceptibles = initial.susceptibles,
-                          infecteds = initial.infecteds)
+                           susceptibles = initial.susceptibles,
+                           infecteds = initial.infecteds)
 
 #Run the simulation
 latest.population2 <- population2.df
@@ -120,9 +120,9 @@ while (latest.population2$time < end.time)
 {
   # calling the new timestep function with the population at the next time step:
   latest.population2 <- timestep_deterministic_SIS(latest = latest.population2, 
-                                                  transmission.rate = ecoli.transmission,
-                                                  recovery.rate = ecoli.recovery,
-                                                  timestep = this.timestep)
+                                                   transmission.rate = ecoli.transmission,
+                                                   recovery.rate = ecoli.recovery,
+                                                   timestep = this.timestep)
   # Add new element onto end of population vector
   population2.df <- rbind(population2.df, latest.population2)
 }
