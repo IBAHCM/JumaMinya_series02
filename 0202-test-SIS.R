@@ -42,11 +42,11 @@ timesteps <- seq(from = start.time+timestep, to = end.time, by = timestep)
 # Now we loop through the time itself (starting at the second time step)
 for (new.time in timesteps) 
 {
-# calling the new step function with the population at the next time step:
+  # calling the new step function with the population at the next time step:
   next.population1<-step_deterministic_SIS(latest = tail(population1.df,1), 
                                            transmission.rate = ecoli.transmission*timestep,
                                            recovery.rate = ecoli.recovery*timestep)
-# Add new element onto end of population vector
+  # Add new element onto end of population vector
   population1.df <- rbind(population1.df, next.population1)
 }
 #'Add time to updated data frame so as to see how the population changes with time.
@@ -82,11 +82,11 @@ timesteps.2 <- seq(from = start.time + timestep.2, to = end.time,by = timestep.2
 # Now we loop through the time itself (starting at the second time step)
 for (new.time in timesteps.2) 
 {
-# calling the new step function with the population at the next time step:
+  # calling the new step function with the population at the next time step:
   next.population2<-step_deterministic_SIS(latest = tail(population2.df,1), 
                                            transmission.rate = ecoli.transmission*timestep.2,
                                            recovery.rate = ecoli.recovery*timestep.2)
-# Add new element onto end of population vector
+  # Add new element onto end of population vector
   population2.df <- rbind(population2.df, next.population2)
 }
 
@@ -118,11 +118,11 @@ timesteps.3 <- seq(from = start.time + timestep.3, to = end.time,by = timestep.3
 # Now we loop through the time itself (starting at the second time step)
 for (new.time in timesteps.3) 
 {
-# calling the new step function with the population at the next time step:
+  # calling the new step function with the population at the next time step:
   next.population3<-step_deterministic_SIS(latest = tail(population3.df,1), 
                                            transmission.rate = ecoli.transmission*timestep.3,
                                            recovery.rate = ecoli.recovery*timestep.3)
-# Add new element onto end of population vector
+  # Add new element onto end of population vector
   population3.df <- rbind(population3.df, next.population3)
 }
 #'
@@ -149,11 +149,11 @@ timesteps.4 <- seq(from = start.time + timestep.4, to = end.time,by = timestep.4
 # Now we loop through the time itself (starting at the second time step)
 for (new.time in timesteps.4) 
 {
-# calling the new step function with the population at the next time step:
+  # calling the new step function with the population at the next time step:
   next.population4<-step_deterministic_SIS(latest = tail(population4.df,1), 
                                            transmission.rate = ecoli.transmission*timestep.4,
                                            recovery.rate = ecoli.recovery*timestep.4)
-# Add new element onto end of population vector
+  # Add new element onto end of population vector
   population4.df <- rbind(population4.df, next.population4)
 }
 #'
