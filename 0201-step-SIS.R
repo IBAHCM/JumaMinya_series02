@@ -29,16 +29,16 @@ step_deterministic_SIS <- function(latest, transmission.rate, recovery.rate)
 {
 #'
 # Calculate the population size   
-pop.size<-latest$susceptible + latest$infected
+pop.size<-latest$susceptibles + latest$infecteds
 #'
 #calculate changes to the population
-new.recovereds<-recovery.rate*latest$infected
-new.infected<-transmission.rate*latest$susceptible*(latest$infected/pop.size)
-next.susceptible<-latest$susceptible + new.recovereds-new.infected
-next.infected<-latest$infected + new.infected - new.recovereds
+new.recovereds<-recovery.rate*latest$infecteds
+new.infecteds<-transmission.rate*latest$susceptibles*(latest$infecteds/pop.size)
+next.susceptibles<-latest$susceptibles + new.recovereds-new.infecteds
+next.infecteds<-latest$infecteds + new.infecteds - new.recovereds
 #'
 # create a data frame with updated population and return    
-data.frame(susceptibles=next.susceptible, infecteds=next.infected)
+data.frame(susceptibles=next.susceptibles, infecteds=next.infecteds)
 }
 #'##### Does the function work without any external (global) information?
 #'
