@@ -1,4 +1,4 @@
-#'
+#' ---
 #' title: "Run timestep_deterministic_SIR function"
 #' author: "Juma Minya"
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
@@ -17,6 +17,7 @@
 #' 
 #Loading Packages
 library(RPiR)
+library(knitr)
 #' 
 # Read the function
 source("0204-deterministic-SIR.R")
@@ -96,8 +97,8 @@ plot_populations(population.SIS.df, col=c("green","red"))
 # The difference between the two models is that in SIR models,the population 
 # balances with recovereds and susceptibles at equilibrium state, while in SIS model,
 # the population balances infecteds and susceptibles. This is because in SIR model,
-# the recovereds are moved from susceptible group while in SIS model, they are
-# moved to susceptible group
+# the recovereds are moved from susceptibles group while in SIS model, they are
+# moved to susceptibles group
 #'
 #'---
 #' 
