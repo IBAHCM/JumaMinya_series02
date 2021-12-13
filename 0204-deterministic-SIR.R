@@ -25,46 +25,46 @@ library(codetools)
 #'  - **timestep** -- series of a time frame
 #'
 #' Returns:
-#' - the next count of recovered,infected and susceptibles in the population
+#' - the next count of recovereds,infecteds and susceptibles in the population
 #'
 #'##The function
 timestep_deterministic_SIR <- function(latest,transmission.rate,
                                        recovery.rate,timestep)
 {
-#'
-# Calculate the population size   
-pop.size<-latest$susceptible + latest$infected + latest$recovered
-#'
-# Calculate changes to the population
-# Calculate the transmission rate
-effective.transmission.rate<-transmission.rate*timestep
-#'
-# Calculate the recovery rate
-effective.recovery.rate<-recovery.rate*timestep
-#'
-# other parameters
-new.infected <- effective.transmission.rate * latest$susceptible *
-    (latest$infected/pop.size)
-#'
-new.recovered <- effective.recovery.rate * latest$infected
-#'
-next.susceptible<-latest$susceptible - new.infected
-#'
-next.infected<-latest$infected + new.infected - new.recovered
-#'
-next.recovered <-latest$recovered + new.recovered
-# create a data frame with updated population and return    
-  #'
+  
+  # Calculate the population size   
+  pop.size<-latest$susceptibles + latest$infecteds + latest$recovereds
+  
+  # Calculate changes to the population
+  # Calculate the transmission rate
+  effective.transmission.rate<-transmission.rate*timestep
+  
+  # Calculate the recovery rate
+  effective.recovery.rate<-recovery.rate*timestep
+  
+  # other parameters
+  new.infecteds <- effective.transmission.rate * latest$susceptibles *
+    (latest$infecteds/pop.size)
+  
+  new.recovereds <- effective.recovery.rate * latest$infecteds
+  
+  next.susceptibles <- latest$susceptibles - new.infecteds
+  
+  next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
+  
+  next.recovereds <- latest$recovereds + new.recovereds
+  # create a data frame with updated population and return    
+  
   return(data.frame(time = latest$time + timestep,
-                    susceptibles = next.susceptible,
-                    infecteds = next.infected,
-                    recovereds = next.recovered))
+                    susceptibles = next.susceptibles,
+                    infecteds = next.infecteds,
+                    recovereds = next.recovereds))
 }
-#'
+
 # checking if the function does not work without any external (global) information
 if (length(findGlobals(timestep_deterministic_SIR,
                        merge = FALSE)$variables) != 0) 
-  {
+{
   stop(
     "Function timestep_deterministic_SIR() may not use global variable(s): ",
     findGlobals(timestep_deterministic_SIR, merge = FALSE)$variables
