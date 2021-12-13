@@ -1,3 +1,4 @@
+#' ---
 #' title: "Practical 2-3: Library containing a timestep_deterministic_SIS function"
 #' author: "Juma Minya"
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'

@@ -1,3 +1,4 @@
+#' ---
 #' title: "Library containing a step_deterministic_SIS function"
 #' author: "Juma Minya"
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
