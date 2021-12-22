@@ -1,14 +1,11 @@
 #' ---
-#' title: "Run step_deterministic_SIS function"
+#' title: "Run step_deterministic_SIS model"
 #' author: "Juma Minya"
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
 #' output: html_document
 #' ---
 #'
-#'#' File: 0201-run-SIS.r
-#' ========================
-#' 
-#' 
+
 #' Objective: running the SIS model and plot the SIS model graphs
 #' 
 #Loading Packages
@@ -16,22 +13,19 @@ library(RPiR)
 library(knitr)
 library(codetools)
 
-#' 
 # Read the function
 source("0201-step-SIS.R")
-#'
-#' First we set up the simulation parameters for every experiment.
+
 #Set the simulation parameters
-pop.size<-100
+pop.size<-100 # cattle number
 initial.infecteds<-2
 initial.susceptibles<-pop.size - initial.infecteds
 ecoli.transmission<- 4/3
 ecoli.recovery<- 1/3
 start.time<-0
 end.time<-100
-#'
 
-# Set up the population starting size (at the first time step)
+# Set up the population starting size data frame (at the first time step)
 population1.df<-data.frame(susceptibles=initial.susceptibles,
                            infecteds=initial.infecteds)
 
@@ -42,26 +36,28 @@ timesteps <- seq(from = start.time + 1, to = end.time)
 for (new.time in timesteps) 
 {
   # calling the new step function with the population at the next time step:
-  next.population1<-step_deterministic_SIS(latest = tail(population1.df,1), 
-                                           transmission.rate = ecoli.transmission,
-                                           recovery.rate = ecoli.recovery)
+  next.population1 <- step_deterministic_SIS(latest = tail(population1.df,1), 
+                                             transmission.rate = ecoli.transmission,
+                                             recovery.rate = ecoli.recovery)
+  
   # Add new element onto end of population vector
   population1.df <- rbind(population1.df, next.population1)
 }
-#'Add time to updated data frame so as to see how the population changes with time.
+
+# Add time to updated data frame to see how the population changes with time.
 population1.df$time<-c(start.time,timesteps)
-#'
+
 #' Plot the results
 #' ----------------
-#' And finally we output the results.
+# And finally we output the results.
 plot_populations(population1.df, col=c("green", "red"))
-#'
+
 #'Interpretation of the graph: 
 #'In this population, the number of infecteds is exponentially increasing 
-#'while the number of susceptibles is decreasing until equilibrium is reached . 
+#'while the number of susceptibles is decreasing until equilibrium is reached. 
 #'This shows that with high basic reproduction ratio i.e. R0>1,
 #' there is high disease spread in a population.
-#'
+
 #' #Add, the column for proportion of susceptibles in a population
 population1.df$prop.susceptibles<-c(population1.df$susceptibles/pop.size)
 print(tail(population1.df,1))
@@ -71,7 +67,6 @@ print(tail(population1.df,1))
 #'##Set the simulation with only ecoli. transmission changed
 ecoli.transmission2<-1
 
-#'
 #'# Set up the population starting size (at the first time step)
 population2.df<-data.frame(susceptibles=initial.susceptibles,
                            infecteds=initial.infecteds)
@@ -112,7 +107,7 @@ print(tail(population2.df,1))
 #'
 #By using different values of beta (transmission rate), we see how the proportional
 #'of susceptibles in a population varies with basic reproduction number as:
-#'
+
 #changing the Transmission rate to 2/3
 ecoli.transmission3<-2/3
 
