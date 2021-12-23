@@ -4,17 +4,18 @@
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
 #' output: html_document
 #' ---
+
 #Load Package
 library(RPiR)
 library(codetools)
 
-#' #' File: 0203-deterministic-SIS.r
+#' File: 0203-deterministic-SIS.r
 #' ========================
-#' #'
-#' ### Function: timestep_deterministic_SIS() 
-#'
-#' Run one step of a step_deterministic_SIS model. 
-#'
+#' 
+### Function: timestep_deterministic_SIS() 
+#' 
+# Run one step of a step_deterministic_SIS model. 
+#' 
 #' Arguments: 
 #' 
 #'  - **latest** -- latest population count
@@ -36,10 +37,10 @@ timestep_deterministic_SIS <- function(latest,transmission.rate,
   pop.size<-latest$susceptibles + latest$infecteds
   
   # Calculate the effective transmission rate for timesteps
-  effective.transmission.rate <- transmission.rate*timestep
+  effective.transmission.rate <- transmission.rate * timestep
   
   # Calculate the effective recovery rate for timesteps
-  effective.recovery.rate <- recovery.rate*timestep
+  effective.recovery.rate <- recovery.rate * timestep
   
   # other population parameters changes
   new.recovereds <- effective.recovery.rate * latest$infecteds 
