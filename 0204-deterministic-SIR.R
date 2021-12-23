@@ -4,13 +4,14 @@
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
 #' output: html_document
 #' ---
+#
 #Load Package
 library(RPiR)
 library(codetools)
 
 #' #' File: 0204-deterministic-SIR.r
 #' ========================
-#' #'
+
 #' ### Function: timestep_deterministic_SIR() 
 #'
 #' Run a timestep_deterministic_SIR model. 
@@ -34,29 +35,26 @@ timestep_deterministic_SIR <- function(latest,transmission.rate,
 {
   
   # Calculate the population size   
-  pop.size<-latest$susceptibles + latest$infecteds + latest$recovereds
+  pop.size <- latest$susceptibles + latest$infecteds + latest$recovereds
   
   # Calculate changes to the population
   # Calculate the transmission rate
-  effective.transmission.rate<-transmission.rate*timestep
+  effective.transmission.rate <- transmission.rate * timestep
   
   # Calculate the recovery rate
-  effective.recovery.rate<-recovery.rate*timestep
+  effective.recovery.rate <- recovery.rate*timestep
   
-  # other parameters
+  # other population parameters
   new.infecteds <- effective.transmission.rate * latest$susceptibles *
     (latest$infecteds/pop.size)
   
   new.recovereds <- effective.recovery.rate * latest$infecteds
-  
   next.susceptibles <- latest$susceptibles - new.infecteds
-  
   next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
-  
   next.recovereds <- latest$recovereds + new.recovereds
-  # create a data frame with updated population and return    
   
-  return(data.frame(time = latest$time + timestep,
+  # create a data frame with updated population and return    
+   return(data.frame(time = latest$time + timestep,
                     susceptibles = next.susceptibles,
                     infecteds = next.infecteds,
                     recovereds = next.recovereds))
