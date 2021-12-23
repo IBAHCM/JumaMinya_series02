@@ -4,13 +4,14 @@
 #' date: '`r format(Sys.Date(), "%B %d %Y")`'
 #' output: html_document
 #' ---
+
 #Load Package
 library(RPiR)
 library(codetools)
 
-#' #' File: 0201-step-SIS.r
+#' File: 0201-step-SIS.r
 #' ========================
-#' #'
+
 #' ### Function: step_deterministic_SIS() 
 #' Run one step of a step_deterministic_SIS model. 
 #'
@@ -26,11 +27,12 @@ library(codetools)
 #' - the next count for updated population count
 #'
 #'##The function
+
 step_deterministic_SIS <- function(latest, transmission.rate, recovery.rate)   
 {
   
   # Calculate the population size   
-  pop.size<-latest$susceptibles + latest$infecteds
+  pop.size <- latest$susceptibles + latest$infecteds
   
   #calculate changes to the population
   new.recovereds <- recovery.rate * latest$infecteds
@@ -39,9 +41,9 @@ step_deterministic_SIS <- function(latest, transmission.rate, recovery.rate)
   next.infecteds <- latest$infecteds + new.infecteds - new.recovereds
   
   # create a data frame with updated population and return    
-  data.frame(susceptibles=next.susceptibles, infecteds=next.infecteds)
+  data.frame(susceptibles = next.susceptibles, infecteds = next.infecteds)
 }
-#'##### Does the function work without any external (global) information?
+##### Does the function work without any external (global) information?
 
 if (length(findGlobals(step_deterministic_SIS,
                        merge = FALSE)$variables) != 0) {
@@ -50,7 +52,6 @@ if (length(findGlobals(step_deterministic_SIS,
     findGlobals(step_deterministic_SIS, merge = FALSE)$variables
   )
 }
-#'
-#'
+
 
 
